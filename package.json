@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Discord bot rewrite #2, this time in TypeScript",
   "main": "index.js",
-  "scripts": {
-    "start": "npm run build:live",
-    "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts"
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/LandonDeam/Skot-Bot-Black"
   },
   "author": "Dr America#9606",
   "license": "ISC",
@@ -17,6 +17,17 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "fast-sort": "^2.2.0"
+    "@discordjs/opus": "^0.3.3",
+    "bufferutil": "^4.0.3",
+    "discord-akairo": "^8.1.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "fast-sort": "^2.2.0",
+    "ffmpeg-static": "^4.2.7",
+    "inversify": "^5.0.5",
+    "node-opus": "^0.3.3",
+    "opusscript": "0.0.7",
+    "reflect-metadata": "^0.1.13",
+    "utf-8-validate": "^5.0.4"
   }
 }
