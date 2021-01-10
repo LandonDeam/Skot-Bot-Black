@@ -2,7 +2,7 @@
   "name": "skot-bot-black",
   "version": "1.0.0",
   "description": "Discord bot rewrite #2, this time in TypeScript",
-  "main": "index.js",
+  "main": "Bot.ts",
   "scripts": {},
   "repository": {
     "type": "git",
@@ -28,6 +28,9 @@
     "node-opus": "^0.3.3",
     "opusscript": "0.0.7",
     "reflect-metadata": "^0.1.13",
+    "sqlite": "^4.0.19",
+    "sqlite3": "^5.0.1",
+    "typeorm": "^0.2.29",
     "utf-8-validate": "^5.0.4"
   }
 }
