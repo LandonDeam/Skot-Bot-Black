@@ -1,5 +1,5 @@
 import {Command} from "discord-akairo";
-import {Message, GuildMember} from "discord.js";
+import {Message, GuildMember, Intents} from "discord.js";
 import {Repository} from "typeorm";
 import {Warns} from "../../models/Warns";
 

@@ -4,6 +4,7 @@ import {join} from "path";
 import {prefix, owners, dbName} from "../Config";
 import {Connection} from "typeorm";
 import Database from "../structures/Database";
+import {Intents} from "discord.js";
 
 declare module "discord-akairo" {
     interface AkairoClient {
@@ -34,8 +35,8 @@ export default class BotClient extends AkairoClient {
         defaultCooldown: 6e4,
         argumentDefaults: {
             prompt: {
-                modifyStart: (_: Message, str: string): string => `{str}\n\nType \`cancel\` to cancel the command...`,
-                modifyRetry: (_: Message, str: string): string => `{str}\n\nType \`cancel\` to cancel the command...`,
+                modifyStart: (_: Message, str: string): string => `${str}\n\nType \`cancel\` to cancel the command...`,
+                modifyRetry: (_: Message, str: string): string => `${str}\n\nType \`cancel\` to cancel the command...`,
                 timeout: "You took too long, the command has been canceled...",
                 ended: "You exceeded the maximum amount of tries, this command has been canceled...",
                 retries: 3,
@@ -48,9 +49,8 @@ export default class BotClient extends AkairoClient {
 
     public constructor(config: BotOptions) {
         super({
-            ownerID: config.owners
+            ownerID: config.owners,
         })
-
         this.config = config;
     }
 
