@@ -1,10 +1,9 @@
 import {AkairoClient, CommandHandler, ListenerHandler} from "discord-akairo";
-import {Message} from "discord.js";
+import {Message, Intents} from "discord.js";
 import {join} from "path";
 import {prefix, owners, dbName} from "../Config";
 import {Connection} from "typeorm";
 import Database from "../structures/Database";
-import {Intents} from "discord.js";
 
 declare module "discord-akairo" {
     interface AkairoClient {
