@@ -19,8 +19,7 @@ export default class KillCommand extends Command {
     }
 
     public exec(message: Message): Promise<void> {
-        message.util.send(`Beginning shutdown...`);
-        
-        return;
+        message.util.send(`Shutting down bot...`);
+        process.exit(0);
     }
 }

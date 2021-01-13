@@ -2,8 +2,10 @@
   "name": "skot-bot-black",
   "version": "1.0.0",
   "description": "Discord bot rewrite #2, this time in TypeScript",
-  "main": "Bot.ts",
-  "scripts": {},
+  "main": "dist/Bot.js",
+  "scripts": {
+    "start": "dist/Bot.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/LandonDeam/Skot-Bot-Black"
