@@ -42,6 +42,26 @@ export default class GiveawayCommand extends Command {
     } //https://youtu.be/1XlQqoR9U8Y?t=790
 
     public async exec(message: Message, {time, item}: {time: number, item: string}): Promise<any> {
+        const giveawayRepo: Repository<Giveaways> = this.client.db.getRepository(Giveaways);
+        const end: number = Date.now() + time;
 
+        const msg: Message = await message.channel.send(new MessageEmbed()
+        .setAuthor(`Giveaway | ${item}`)
+        .setColor("#4caf50")
+        .setDescription(`${message.author} is giving away **${item}**`)
+        .setFooter("Giveway Ends")
+        .setTimestamp(end)
+        );
+        msg.react("🎉");
+
+        giveawayRepo.insert({
+            channel: msg.channel.id,
+            message: msg.id,
+            end: end
+        });
+
+        setTimeout(() => {
+            GiveawayManager.end(giveawayRepo, msg);
+        }, time);
     }
 }
