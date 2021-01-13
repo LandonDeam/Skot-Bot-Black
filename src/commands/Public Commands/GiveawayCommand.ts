@@ -41,7 +41,7 @@ export default class GiveawayCommand extends Command {
         })
     } //https://youtu.be/1XlQqoR9U8Y?t=790
 
-    public async exec(message: Message, {time, item}: {time: number, item: string}): Promise<any> {
+    public async exec(message: Message, {time, item}: {time: number, item: string}): Promise<void> {
         const giveawayRepo: Repository<Giveaways> = this.client.db.getRepository(Giveaways);
         const end: number = Date.now() + time;
 
@@ -49,7 +49,7 @@ export default class GiveawayCommand extends Command {
         .setAuthor(`Giveaway | ${item}`)
         .setColor("#4caf50")
         .setDescription(`${message.author} is giving away **${item}**`)
-        .setFooter("Giveway Ends")
+        .setFooter("Giveaway Ends")
         .setTimestamp(end)
         );
         msg.react("🎉");
