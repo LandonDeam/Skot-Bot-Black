@@ -1,12 +1,11 @@
 import {Command} from "discord-akairo";
 import {Message, GuildMember, User, MessageEmbed} from "discord.js";
 import {Repository} from "typeorm";
-import { EmbeddedMetadata } from "typeorm/metadata/EmbeddedMetadata";
 import {Warns} from "../../models/Warns";
 
 export default class InfractionsCommand extends Command {
     public constructor() {
-        super("infractions"), {
+        super("infractions", {
             aliases: ["infractions", "warns"],
             category: "Moderation Commands",
             description: {
@@ -26,7 +25,7 @@ export default class InfractionsCommand extends Command {
                     default: (msg: Message) => msg.member
                 }
             ]
-        }
+        });
     }
 
     public async exec(message: Message, {member}: {member: GuildMember}): Promise<Message> {
