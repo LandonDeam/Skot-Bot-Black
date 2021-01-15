@@ -1,6 +1,6 @@
 import {Command} from "discord-akairo";
 import {Message, MessageEmbed} from "discord.js";
-import {stripIdents} from "common-tags";
+import {stripIndents} from "common-tags";
 
 export default class HelpCommand extends Command {
     public constructor() {
@@ -31,7 +31,7 @@ export default class HelpCommand extends Command {
             return message.channel.send(new MessageEmbed()
                 .setAuthor(`Help | ${command}`, this.client.user.displayAvatarURL())
                 .setColor("#4caf50")
-                .setDescription(stripIdents`
+                .setDescription(stripIndents`
                     **Description:**
                     ${command.description.content || "No content provided."}
 
