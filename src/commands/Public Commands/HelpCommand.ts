@@ -8,7 +8,7 @@ export default class HelpCommand extends Command {
             aliases: ["help", "commands", "cmds"],
             category: "Public Commands",
             description: {
-                content: "View avaliable commands on the bot",
+                content: "View available commands on the bot",
                 usage: "help [command]",
                 examples: [
                     "help",
