@@ -4,7 +4,7 @@
             "previewLimit": 50,
             "driver": "SQLite",
             "database": "${workspaceFolder:Skot-Bot-Black}/db.sqlite",
-            "name": "SQLite"
+            "name": "dbName"
         }
     ],
     "sqltools.useNodeRuntime": true
