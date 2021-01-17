@@ -20,14 +20,8 @@ export default class GiveawayCommand extends Command {
             ratelimit: 3,
             args: [
                 {
-                    id: "time",
-                    type: (msg: Message, str: string) => {
-                        return Number(ms(str));
-                    },
-                    prompt: {
-                        start: (msg: Message) => `${msg.author}, you must provide a time!`,
-                        retry: (msg: Message) => `${msg.author}, you must provide a valid time!`
-                    }
+                    id: "timeStr",
+                    type: "string"
                 },
                 {
                     id: "item",
@@ -41,27 +35,33 @@ export default class GiveawayCommand extends Command {
         })
     } //https://youtu.be/1XlQqoR9U8Y?t=790
 
-    public async exec(message: Message, {time, item}: {time: number, item: string}): Promise<void> {
-        const giveawayRepo: Repository<Giveaways> = this.client.db.getRepository(Giveaways);
-        const end: number = Date.now() + time;
+    public async exec(message: Message, {timeStr, item}: {timeStr: string, item: string}): Promise<void> {
+        try{
+            let time: number = ms(timeStr);
+            const giveawayRepo: Repository<Giveaways> = this.client.db.getRepository(Giveaways);
+            const end: number = Date.now() + time;
 
-        const msg: Message = await message.channel.send(new MessageEmbed()
-        .setAuthor(`Giveaway | ${item}`)
-        .setColor("#4caf50")
-        .setDescription(`${message.author} is giving away **${item}**`)
-        .setFooter("Giveaway Ends")
-        .setTimestamp(end)
-        );
-        msg.react("🎉");
+            const msg: Message = await message.channel.send(new MessageEmbed()
+            .setAuthor(`Giveaway | ${item}`)
+            .setColor("#4caf50")
+            .setDescription(`${message.author} is giving away **${item}**`)
+            .setFooter("Giveaway Ends")
+            .setTimestamp(end)
+            );
+            msg.react("🎉");
 
-        giveawayRepo.insert({
-            channel: msg.channel.id,
-            message: msg.id,
-            end: end
-        });
+            giveawayRepo.insert({
+                channel: msg.channel.id,
+                message: msg.id,
+                end: end
+            });
 
-        setTimeout(() => {
-            GiveawayManager.end(giveawayRepo, msg);
-        }, time);
+            setTimeout(() => {
+                GiveawayManager.end(giveawayRepo, msg);
+            }, time);
+        }
+        catch {
+            message.util.reply(`Please enter a valid time!`);
+        }
     }
 }

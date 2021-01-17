@@ -3,6 +3,7 @@ import {dbName} from "../Config";
 
 import {Warns} from "../models/Warns";
 import {Giveaways} from "../models/Giveaway";
+import {Balance} from "../models/Balance";
 
 const connectionManager: ConnectionManager = new ConnectionManager();
 connectionManager.create({
@@ -11,7 +12,8 @@ connectionManager.create({
     database: "./db.sqlite",
     entities: [
         Warns,
-        Giveaways
+        Giveaways,
+        Balance
     ]
 });
 

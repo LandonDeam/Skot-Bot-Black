@@ -12,7 +12,7 @@ export default class InfractionsCommand extends Command {
                 content: "Check infractions of a member",
                 usage: "infractions [member]",
                 examples: [
-                    "infractions @Host0001",
+                    "infractions @Host#0001",
                     "infractions host"
                 ]
             },
