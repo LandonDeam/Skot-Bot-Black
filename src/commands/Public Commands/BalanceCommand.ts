@@ -17,7 +17,7 @@ export default class BalanceCommand extends Command {
                     "balance @Host#0001"
                 ]
             },
-            ratelimit: 3,
+            ratelimit: 10,
             args: [
                 {
                     id: "member",

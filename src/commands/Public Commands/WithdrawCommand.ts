@@ -1,6 +1,6 @@
 import {Command} from "discord-akairo";
 import {MessageEmbed} from "discord.js";
-import {Message, GuildMember} from "discord.js";
+import {Message} from "discord.js";
 import {Repository} from "typeorm";
 import {Balance} from "../../models/Balance";
 import BalanceManager from "../../structures/economy/BalanceManager";
@@ -18,7 +18,7 @@ export default class WithdrawCommand extends Command {
                     "withdraw"
                 ]
             },
-            ratelimit: 3
+            ratelimit: 5
         });
     }
 
@@ -40,12 +40,14 @@ export default class WithdrawCommand extends Command {
             .setTimestamp(ends)
             );
         } //Math.pow(2.5, (Math.random() / 12) * Math.log10((Number(user.time) / 86400000) + 1))
-        let multiplier: number = 1 + (0.2 * Math.log(6 * (Math.random() * 0.33 + 0.67) * (Number(user.time) / 86400000) + 100) + 0.079);
+        let multiplier: number = 0.2 * Math.log(6 * (Math.random() * 0.33 + 0.67) * (Number(user.time) / 86400000) + 100) + 0.079;
+        let money: number = Number((await BalanceManager.getUser(balanceRepo, message.member)).bal);
+        let withdrawn: number = await BalanceManager.withdraw(balanceRepo, message.member, multiplier);
         return message.util.send(new MessageEmbed()
         .setAuthor(`Withdrawal | ${message.member.user.tag}`)
         .setColor("#4caf50")
-        .setDescription(`Withdrawn: *${(await BalanceManager.withdraw(balanceRepo, message.member, multiplier)).toLocaleString('en-us')}GH₵*\n`+
-                        `New Balance: ${await (await BalanceManager.getUser(balanceRepo, message.member)).bal}GH₵`)
+        .setDescription(`Withdrawn: *${(withdrawn).toLocaleString('en-us')}GH₵*\n`+
+                        `New Balance: ${(money + withdrawn).toLocaleString('en-us')}GH₵`)
         );
     }
 }

@@ -19,7 +19,7 @@ export default class BankCommand extends Command {
                     "bank @Host#0001"
                 ]
             },
-            ratelimit: 3,
+            ratelimit: 5,
             args: [
                 {
                     id: "member",
@@ -49,10 +49,11 @@ export default class BankCommand extends Command {
         }
         else{
             const ends: number = Number(user.timeDeposited);
+            let str: string = ms(Number(user.timeDeposited)+Number(user.time)-Date.now(), {long: true});
             return  message.util.send(new MessageEmbed()
             .setAuthor(`Bank | ${member.user.tag}`)
             .setColor("#f44336")
-            .setDescription(`Will be available for withdrawal in *${ms((Number(user.timeDeposited) + Number(user.time))-(Date.now()))}.*\n`+
+            .setDescription(`Will be available for withdrawal in *${str}.*\n`+
                             `Amount deposited: **${(user.bank).toLocaleString('en-us')}GH₵**`)
             .setFooter(`Deposited`)
             .setTimestamp(ends)
