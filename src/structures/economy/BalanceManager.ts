@@ -4,8 +4,8 @@ import {Balance} from "../../models/Balance";
 
 export default {
     async exist(balanceRepo: Repository<Balance>, member: GuildMember) {
-        console.log(`Checking if ${member.id} is in db...`);
-        const user = balanceRepo.findOne({user: member.id})
+        //console.log(`Checking if ${member.id} is in db...`);
+        const user: Balance = await balanceRepo.findOne({user: member.id})
         if(user == undefined){
         console.log(`${member.id} was added to db.`);
         balanceRepo.insert({
@@ -19,8 +19,8 @@ export default {
     },
 
     async getUser(balanceRepo: Repository<Balance>, member: GuildMember): Promise<Balance> {
-        this.exist(balanceRepo, member);
-        return balanceRepo.findOne({user: member.id});
+        await this.exist(balanceRepo, member);
+        return await balanceRepo.findOne({user: member.id});
     },
 
     async give(balanceRepo: Repository<Balance>, member: GuildMember, money: number) {
@@ -39,13 +39,17 @@ export default {
         balanceRepo.save(user);
     },
 
-    async withdraw(balanceRepo: Repository<Balance>, member: GuildMember, multiplier: number) {
+    async withdraw(balanceRepo: Repository<Balance>, member: GuildMember, multiplier: number): Promise<number> {
         let user: Balance = await balanceRepo.findOne({user: member.id});
-        user.bal += (user.bank * multiplier);
+        let withdrawn: number = Math.floor(Number(user.bank) * multiplier * 100)/100;
+        console.log(`${member.user.tag} withdrew ${withdrawn}`);
+        user.bal = Number(withdrawn) + Number(user.bal);
         user.bank = 0;
         user.time = 0;
         user.timeDeposited = 0;
+        console.log(`${member.user.tag} now has a balance of ${user.bal}`);
         balanceRepo.save(user);
+        return withdrawn;
     }
 
 }

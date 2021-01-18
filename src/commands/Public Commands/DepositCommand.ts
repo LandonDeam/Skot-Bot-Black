@@ -1,9 +1,10 @@
 import {Command} from "discord-akairo";
-import {Message, GuildMember} from "discord.js";
-import {MongoEntityManager, Repository} from "typeorm";
+import {Message} from "discord.js";
+import {Repository} from "typeorm";
 import {Balance} from "../../models/Balance";
 import BalanceManager from "../../structures/economy/BalanceManager";
 import ms from "ms";
+import { MessageEmbed } from "discord.js";
 
 export default class DepositCommand extends Command {
     public constructor() {
@@ -40,18 +41,35 @@ export default class DepositCommand extends Command {
         try {
             let time: number = ms(timeStr);
             const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
-            let user = await BalanceManager.getUser(balanceRepo, message.member);
-            if(user.bal >= money) {
+            const user = await BalanceManager.getUser(balanceRepo, message.member);
+            if(Number(user.bal) >= money && time > 0 && money >= 1 && Number(user.bank == 0)) {
+
                 BalanceManager.deposit(balanceRepo, message.member, money, time);
                 let str: string = ms(time, {long: true});
-                message.util.send(`${message.member.nickname} deposited ${money} for the next ${str}.`)
+                await message.util.send(new MessageEmbed()
+                    .setAuthor(`Bank | ${message.member.user.tag}`)
+                    .setColor("#f44336")
+                    .setDescription(`Will be available for withdrawal in *${str}.*\n`+
+                                    `Amount deposited: **${(money).toLocaleString('en-us')}GH₵**`)
+                    .setFooter(`Available`)
+                    .setTimestamp(Date.now() + time)
+                );
+            }
+            else if(time <= 0) {
+                message.util.reply(`Error, time must be greater than 0!`);
+            }
+            else if(time < 1) {
+                message.util.reply(`Error, you must put at least 1GH₵!`);
+            }
+            else if(Number(user.bank) != 0) {
+                message.util.reply(`Error! You can only have one bank deposit at a time!`);
             }
             else {
                 message.util.reply(`Error, insufficient funds!`);
             }
         }
         catch {
-            message.util.reply(`Error! invalid time was entered!`);
+            message.util.reply(`error! Invalid time was entered!`);
         }
         
     }

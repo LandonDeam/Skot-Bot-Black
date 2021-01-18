@@ -31,7 +31,7 @@ export default class BalanceCommand extends Command {
     public async exec(message: Message, {member}: {member: GuildMember}): Promise<Message> {
         const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
         return message.util.send(
-            `${member.nickname} has ${((await BalanceManager.getUser(balanceRepo, member)).bal).toLocaleString('en-us')} GH₵`
+            `${member.nickname} has ${((await BalanceManager.getUser(balanceRepo, member)).bal).toLocaleString('en-us')}GH₵.`
             );
     }
 }
