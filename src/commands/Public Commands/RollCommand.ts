@@ -5,7 +5,7 @@ import sort from "fast-sort";
 export default class RollCommand extends Command {
     public constructor() {
         super("roll", {
-            aliases: ["roll"],
+            aliases: ["roll","d20"],
             category: "Public Commands",
             description: {
                 content: "Returns a random number either from 1-10 or between any two given integers",
@@ -25,7 +25,7 @@ export default class RollCommand extends Command {
                 {
                     id: "numTwo",
                     type: "number",
-                    default: (msg: Message) => 10
+                    default: (msg: Message) => 20
                 }
             ]
         });

@@ -7,7 +7,7 @@ export default {
         //console.log(`Checking if ${member.id} is in db...`);
         const user: Balance = await balanceRepo.findOne({user: member.id})
         if(user == undefined){
-        console.log(`${member.id} was added to db.`);
+        console.log(`${member.user.tag} was added to db.`);
         balanceRepo.insert({
             user: member.id,
             bal: 100,
