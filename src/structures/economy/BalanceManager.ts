@@ -23,10 +23,10 @@ export default {
         return await balanceRepo.findOne({user: member.id});
     },
 
-    async give(balanceRepo: Repository<Balance>, member: GuildMember, money: number) {
+    async add(balanceRepo: Repository<Balance>, member: GuildMember, money: number) {
         await this.exist(balanceRepo, member);
         let user: Balance = await balanceRepo.findOne({user: member.id});
-        user.bal += money;
+        user.bal = money + Number(user.bal);
         balanceRepo.save(user);
     },
 
@@ -43,7 +43,7 @@ export default {
         let user: Balance = await balanceRepo.findOne({user: member.id});
         let withdrawn: number = Math.floor(Number(user.bank) * multiplier * 100)/100;
         console.log(`${member.user.tag} withdrew ${withdrawn}`);
-        user.bal = Number(withdrawn) + Number(user.bal);
+        this.add(balanceRepo, member, withdrawn);
         user.bank = 0;
         user.time = 0;
         user.timeDeposited = 0;

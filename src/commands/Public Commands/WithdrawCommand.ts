@@ -39,8 +39,8 @@ export default class WithdrawCommand extends Command {
             .setFooter(`Deposited`)
             .setTimestamp(ends)
             );
-        } //
-        let multiplier: number = Math.pow(2.5, (Math.random() / 2) * Math.log10((Number(user.time) / 86400000) + 1));
+        } //Math.pow(2.5, (Math.random() / 12) * Math.log10((Number(user.time) / 86400000) + 1))
+        let multiplier: number = 1 + (0.2 * Math.log(6 * (Math.random() * 0.33 + 0.67) * (Number(user.time) / 86400000) + 100) + 0.079);
         return message.util.send(new MessageEmbed()
         .setAuthor(`Withdrawal | ${message.member.user.tag}`)
         .setColor("#4caf50")
