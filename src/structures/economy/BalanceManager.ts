@@ -42,7 +42,7 @@ export default {
     async withdraw(balanceRepo: Repository<Balance>, member: GuildMember, multiplier: number): Promise<number> {
         let user: Balance = await balanceRepo.findOne({user: member.id});
         let withdrawn: number = Math.floor(Number(user.bank) * multiplier * 100)/100;   
-        console.log(`${member.user.tag} withdrew ${withdrawn} with a percentage of ${multiplier}`);
+        console.log(`${member.user.tag} withdrew ${withdrawn} with a percentage of ${(multiplier - 1) * 100}`);
         await this.add(balanceRepo, member, withdrawn);
         user.bank = 0;
         user.time = 0;
