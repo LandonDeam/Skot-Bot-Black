@@ -27,7 +27,7 @@ export default class ChooseCommand extends Command {
     public async exec(message: Message, {items}: {items:string}): Promise<Message> {
         try {
             let arr: String[] = items.split(",");
-            arr.forEach(str => { str = str.trim(); });
+            arr.forEach(str => { str = str.trim(); }); // gets rid of trailing line breaks and spaces (not working properly atm)
             let choice: number = Math.floor(Math.random() * arr.length);
             return message.util.send(`I choose ${arr[choice]}`);
         }

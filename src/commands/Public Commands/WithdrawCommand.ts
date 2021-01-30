@@ -26,10 +26,10 @@ export default class WithdrawCommand extends Command {
         const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
         let user = await BalanceManager.getUser(balanceRepo, message.member);
 
-        if(Number(user.bank) <= 0) {
+        if(Number(user.bank) <= 0) { //check if user have no money in da bank
             return message.util.reply(`You have no money in the bank to withdraw!`);
         }
-        else if(Number(user.timeDeposited) + Number(user.time) > Date.now()) {
+        else if(Number(user.timeDeposited) + Number(user.time) > Date.now()) { // checks if user is not able to claim their banked money yet
 
             const ends: number = Number(user.timeDeposited);
             return  message.util.send(new MessageEmbed()
@@ -42,7 +42,7 @@ export default class WithdrawCommand extends Command {
             );
 
         } //Math.pow(2.5, (Math.random() / 12) * Math.log10((Number(user.time) / 86400000) + 1))
-        let multiplier: number = 0.2 * Math.log(12 * (Math.random() * .99 + .01) * (Number(user.time) / 8640000) + 100) + 0.079;
+        let multiplier: number = 0.2 * Math.log(12 * (Math.random() * .99 + .01) * (Number(user.time) / 8640000) + 100) + 0.079; // user claims banked money + interest
         let money: number = Number((await BalanceManager.getUser(balanceRepo, message.member)).bal);
         let withdrawn: number = await BalanceManager.withdraw(balanceRepo, message.member, multiplier);
         return message.util.send(new MessageEmbed()

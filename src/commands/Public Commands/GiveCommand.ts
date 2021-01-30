@@ -36,7 +36,7 @@ export default class GiveCommand extends Command {
         let receiver: Balance = await BalanceManager.getUser(balanceRepo, member);
         let sender: Balance = await BalanceManager.getUser(balanceRepo, message.member);
 
-        if(money <= Number(sender.bal)) {
+        if(money <= Number(sender.bal)) { //check if user has enough money
             await BalanceManager.add(balanceRepo, message.member, -money);
             await BalanceManager.add(balanceRepo, member, money);
             return message.util.send(new MessageEmbed()
@@ -45,7 +45,7 @@ export default class GiveCommand extends Command {
                 .setColor("4caf50")
             );
         }
-        return message.util.reply(new MessageEmbed()
+        return message.util.reply(new MessageEmbed() //user not have enough money >:(
             .setAuthor(`Western Union`)
             .setDescription(`**Failed to send ${(money).toLocaleString('en-us')}GH₵ to ${member.nickname}, insufficient funds in user account.**\n`+
                             `You have: ${(sender.bal).toLocaleString('en-us')}GH₵`)

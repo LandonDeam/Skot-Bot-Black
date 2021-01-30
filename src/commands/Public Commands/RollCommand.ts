@@ -32,7 +32,7 @@ export default class RollCommand extends Command {
     }
 
     public exec(message: Message, {numOne, numTwo}: {numOne: number, numTwo: number}): Promise<Message> {
-        let nums: number[] = sort([numOne, numTwo]).asc();
+        let nums: number[] = sort([numOne, numTwo]).asc(); // sorts the inputs to make it go in ascending order
         return message.util.send(`You rolled ${Math.floor(Math.random() * (nums[1] - nums[0] + 1) + nums[0])}`);
     }
 }
