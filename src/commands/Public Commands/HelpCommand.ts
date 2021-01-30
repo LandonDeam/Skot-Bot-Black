@@ -54,7 +54,7 @@ export default class HelpCommand extends Command {
 
             embed.addField(category.id, category
                 .filter(cmd => cmd.aliases.length > 0)
-                .map(cmd => `**\`${cmd}\``)
+                .map(cmd => `\`${cmd}\``)
                 .join(", ") || "No commands in this category."
                 );
         }

@@ -8,7 +8,7 @@ export default class BalanceCommand extends Command {
     public constructor() {
         super("balance", {
             aliases: ["balance","bal"],
-            category: "Public Commands",
+            category: "Economy Commands",
             description: {
                 content: "Check the balance of a user",
                 usage: "balance <member>",

@@ -10,7 +10,7 @@ export default class BankCommand extends Command {
     public constructor() {
         super("bank", {
             aliases: ["bank"],
-            category: "Public Commands",
+            category: "Economy Commands",
             description: {
                 content: "Check the bank status of a member",
                 usage: "bank <member>",

@@ -10,7 +10,7 @@ export default class DepositCommand extends Command {
     public constructor() {
         super("deposit", {
             aliases: ["deposit"],
-            category: "Public Commands",
+            category: "Economy Commands",
             description: {
                 content: "Deposits specified amount of money in the bank for a period of time to collect interest.",
                 usage: "deposit [money] [time]",

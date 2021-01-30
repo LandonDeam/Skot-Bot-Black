@@ -5,7 +5,7 @@ export default class ChooseCommand extends Command {
     public constructor() {
         super("choose", {
             aliases: ["choose"],
-            category: "Public Command",
+            category: "Public Commands",
             description: {
                 content: "Chooses between a set of things",
                 usage: "choose [item1, item2, etc...]",

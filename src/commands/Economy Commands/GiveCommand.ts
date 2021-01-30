@@ -8,7 +8,7 @@ export default class GiveCommand extends Command {
     public constructor() {
         super("give", {
             aliases: ["give","g"],
-            category: "Public Commands",
+            category: "Economy Commands",
             description: {
                 content: "Give specified amount of currency to another member",
                 usage: "give [member] [money]",
