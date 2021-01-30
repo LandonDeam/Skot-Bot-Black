@@ -49,7 +49,7 @@ export default class FlipCommand extends Command {
         }
         return message.util.send(new MessageEmbed()
             .setAuthor("Flip!")
-            .setDescription(`Sorry ${message.member.nickname}. I don't give credit. Come back when you're a little, mmmm.... richer!`)
+            .setDescription(`Sorry ${message.member.nickname}, I don't give credit. Come back when you're a little, mmmm.... richer!`)
             .setColor("#f44336")
             .setFooter("-Morshu")
         );
