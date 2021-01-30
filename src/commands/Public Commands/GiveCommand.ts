@@ -36,7 +36,7 @@ export default class GiveCommand extends Command {
         let receiver: Balance = await BalanceManager.getUser(balanceRepo, member);
         let sender: Balance = await BalanceManager.getUser(balanceRepo, message.member);
 
-        if(money > Number(sender.bal)) {
+        if(money <= Number(sender.bal)) {
             await BalanceManager.add(balanceRepo, message.member, -money);
             await BalanceManager.add(balanceRepo, member, money);
             return message.util.send(new MessageEmbed()
