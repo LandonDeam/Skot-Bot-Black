@@ -10,7 +10,7 @@ export default class WithdrawCommand extends Command {
     public constructor() {
         super("withdraw", {
             aliases: ["withdraw","wd"],
-            category: "Public Commands",
+            category: "Economy Commands",
             description: {
                 content: "Withdraws funds from the bank",
                 usage: "withdraw",

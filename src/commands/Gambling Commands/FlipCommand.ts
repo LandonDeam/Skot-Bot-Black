@@ -7,7 +7,7 @@ export default class FlipCommand extends Command {
     public constructor() {
         super("flip", {
             aliases: ["flip","bet"],
-            category: "Public Commands",
+            category: "Gambling Commands",
             description: {
                 content: "50/50 chance to double your money, or lose it all",
                 usage: "flip [money]",
