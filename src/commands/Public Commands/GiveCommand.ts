@@ -21,11 +21,17 @@ export default class GiveCommand extends Command {
             args: [
                 {
                     id: "member",
-                    type: "member"
+                    type: "member",
+                    prompt: {
+                        start: (msg:Message) => `${msg.author}, you must provide a valid member to send to!`
+                    }
                 },
                 {
                     id: "money",
-                    type: "number"
+                    type: "number",
+                    prompt: {
+                        start: (msg:Message) => `${msg.author}, you must provide a proper amount of money!`
+                    }
                 }
             ]
         });
