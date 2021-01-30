@@ -1,6 +1,6 @@
 import {Command} from "discord-akairo";
 import {Message, MessageEmbed, GuildMember} from "discord.js";
-import { Repository } from "typeorm";
+import {Repository} from "typeorm";
 import {Balance} from "../../models/Balance";
 import BalanceManager from "../../structures/economy/BalanceManager";
 
