@@ -39,7 +39,6 @@ export default class GiveCommand extends Command {
 
     public async exec(message: Message, {member, money}: {member: GuildMember, money: number}): Promise<Message> {
         const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
-        let receiver: Balance = await BalanceManager.getUser(balanceRepo, member);
         let sender: Balance = await BalanceManager.getUser(balanceRepo, message.member);
 
         if(money <= Number(sender.bal)) { // check if user has enough money
