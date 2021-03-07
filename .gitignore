@@ -102,6 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Custom ignores
 src/Config.ts
 db.sqlite
 build
