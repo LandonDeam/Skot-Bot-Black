@@ -8,7 +8,7 @@ export default class RollCommand extends Command {
             aliases: ["roll","d20"],
             category: "Public Commands",
             description: {
-                content: "Returns a random number either from 1-10 or between any two given integers",
+                content: "Returns a random number either from 1-20 or between any two given integers",
                 usage: "roll <number> <number>",
                 examples: [
                     "roll",
