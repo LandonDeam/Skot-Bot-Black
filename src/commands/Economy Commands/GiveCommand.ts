@@ -53,7 +53,7 @@ export default class GiveCommand extends Command {
         else if(money < 0) {
             return message.util.reply(new MessageEmbed()
             .setAuthor(`Western Union`)
-            .setDescription("**That's stealing bro, you can't do that.**" + ((money < 100) ? "And you a bum bro :skull::skull::skull::skull::skull:" : ""))
+            .setDescription("**That's stealing bro, you can't do that.**" + ((money < 100) ? "\nAnd you a bum bro :skull::skull::skull::skull::skull:" : ""))
             .setColor("#f44336")
             )
         }
