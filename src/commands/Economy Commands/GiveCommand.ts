@@ -41,7 +41,7 @@ export default class GiveCommand extends Command {
         const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
         let sender: Balance = await BalanceManager.getUser(balanceRepo, message.member);
 
-        if(money <= Number(sender.bal)) { // check if user has enough money
+        if(money <= Number(sender.bal) && money > 0) { // check if user has enough money
             await BalanceManager.add(balanceRepo, message.member, -money);
             await BalanceManager.add(balanceRepo, member, money);
             return message.util.send(new MessageEmbed()
@@ -49,6 +49,16 @@ export default class GiveCommand extends Command {
                 .setDescription(`${message.member.nickname} successfully gave ${member.nickname} ${(money).toLocaleString('en-us')}GH₵!`)
                 .setColor("#4caf50")
             );
+        }
+        else if(money < 0) {
+            return message.util.reply(new MessageEmbed()
+            .setAuthor(`Western Union`)
+            .setDescription("**That's stealing bro, you can't do that.**" + ((money < 100) ? "And you a bum bro :skull::skull::skull::skull::skull:" : ""))
+            .setColor("#f44336")
+            )
+        }
+        else if(money == 0) {
+            return message.util.reply("Nah.")
         }
         return message.util.reply(new MessageEmbed() // user not have enough money >:(
             .setAuthor(`Western Union`)

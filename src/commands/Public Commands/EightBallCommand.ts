@@ -1,6 +1,5 @@
 import {Command} from "discord-akairo";
 import {Message} from "discord.js";
-import { Double } from "typeorm";
 
 export default class EightBallCommand extends Command {
     public constructor() {
@@ -39,7 +38,7 @@ export default class EightBallCommand extends Command {
             "Without a doubt.",
             "Yes.",
             "Yes – definitely.",
-            "You may rely on it."
+            "You may rely on it.",
         ]
         msg.util.send(outcome[Math.floor(Math.random() * outcome.length)]);
     }
