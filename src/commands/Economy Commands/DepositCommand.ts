@@ -43,7 +43,7 @@ export default class DepositCommand extends Command {
             const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
             const user = await BalanceManager.getUser(balanceRepo, message.member);
 
-            if(Number(user.bal) >= money && time > 0 && money >= 1 && Number(user.bank == 0)) { // deposits inputted amount and displays the time until withdrawal is available
+            if(Number(user.bal) >= money && time > 0 && money > 0 && Number(user.bank == 0)) { // deposits inputted amount and displays the time until withdrawal is available
 
                 BalanceManager.deposit(balanceRepo, message.member, money, time);
                 let str: string = ms(time, {long: true});

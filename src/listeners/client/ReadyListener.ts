@@ -30,5 +30,7 @@ export default class ReadyListener extends Listener {
                 GiveawayManager.end(giveawayRepo, msg);
             });
         }, 3e5);
+
+        
     }
 }
