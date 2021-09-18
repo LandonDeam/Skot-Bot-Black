@@ -1,5 +1,6 @@
 import {Command} from "discord-akairo";
 import {Message} from "discord.js";
+import seedrandom from "seedrandom";
 
 export default class EightBallCommand extends Command {
     public constructor() {
@@ -40,6 +41,6 @@ export default class EightBallCommand extends Command {
             "Yes – definitely.",
             "You may rely on it.",
         ]
-        msg.util.send(outcome[Math.floor(Math.random() * outcome.length)]);
+        msg.util.send(outcome[Math.floor(seedrandom(msg.author.id+msg.content.toLowerCase().replace("\W", "")+Date.now())() * outcome.length)]);
     }
 }

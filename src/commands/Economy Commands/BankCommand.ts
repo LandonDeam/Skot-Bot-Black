@@ -34,7 +34,7 @@ export default class BankCommand extends Command {
         const balanceRepo: Repository<Balance> = this.client.db.getRepository(Balance);
         const user: Balance = await BalanceManager.getUser(balanceRepo, member);
 
-        if(Number(user.bank) <= 0) return message.util.send(`${member.nickname} has nothing banked at the moment.`); // returns if no money in bank
+        if(Number(user.bank) <= 0) return message.util.send(`${member.displayName} has nothing banked at the moment.`); // returns if no money in bank
 
         if(Number(user.timeDeposited) + Number(user.time) <= Date.now()) { // if the money in the member's bank is available for withdraw
             const ended: number = Number(user.timeDeposited) + Number(user.time);
