@@ -1,6 +1,7 @@
 import{Command} from "discord-akairo";
 import{Message} from "discord.js";
 import sort from "fast-sort";
+import seedrandom from "seedrandom";
 
 export default class RollCommand extends Command {
     public constructor() {
@@ -33,6 +34,6 @@ export default class RollCommand extends Command {
 
     public exec(message: Message, {numOne, numTwo}: {numOne: number, numTwo: number}): Promise<Message> {
         let nums: number[] = sort([numOne, numTwo]).asc(); // sorts the inputs to make it go in ascending order
-        return message.util.send(`You rolled ${Math.floor(Math.random() * (nums[1] - nums[0] + 1) + nums[0])}`);
+        return message.util.send(`You rolled ${Math.floor(seedrandom(message.author.id+message.content.toLowerCase().replace("\W", "")+Date.now())() * (nums[1] - nums[0] + 1) + nums[0])}`);
     }
 }

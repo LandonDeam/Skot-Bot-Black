@@ -1,5 +1,6 @@
 import {Command} from "discord-akairo";
 import {Message} from "discord.js";
+import seedrandom from "seedrandom";
 
 export default class ChooseCommand extends Command {
     public constructor() {
@@ -26,10 +27,9 @@ export default class ChooseCommand extends Command {
 
     public async exec(message: Message, {items}: {items:string}): Promise<Message> {
         try {
-            let arr: String[] = items.split(",");
-            arr.forEach(str => { str = str.trim(); }); // gets rid of trailing line breaks and spaces (not working properly atm)
-            let choice: number = Math.floor(Math.random() * arr.length);
-            return message.util.send(`I choose ${arr[choice]}`);
+            let arr: String[] = items.split(RegExp(/\,(\ *)?/g));
+            let choice: number = Math.floor(seedrandom(message.author.id+message.content.toLowerCase().replace("\W", "")+Date.now())() * arr.length);
+            return message.util.send("I choose: " + ((arr[choice] != "") ? arr[choice] : "Fuck you"));
         }
         catch {
             return message.util.reply(`Error ocurred`);
