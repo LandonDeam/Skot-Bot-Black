@@ -28,7 +28,7 @@ export default class OwnerSayCommand extends Command {
 
     public exec(message: Message, {channel, content}: {channel:string, content:string}): Promise<Message> {
         if(message.author.id == "245659499292131349") {
-            message.util.send(`Sent \"${content}\" in ${channel}`)
+            message.util.send(`Sent \"${content}\" in <#${channel}>`)
             return (this.client.channels.cache.get(channel) as TextChannel).send(content);
         }
         else {
